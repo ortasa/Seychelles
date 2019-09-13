@@ -24,12 +24,26 @@ def Draw_matix(r_locs, i_locs, c_locs, ang, score):
     width = 10000  # [m]
     height = 4000  # [m]
 
-    pix = np.zeros((width, height))
+    input = np.zeros((width, height))
 
+    #r_locs: Location of each rocket in the game (x,y)
     for r in r_locs:
-        pix[int(r.x + 0.5*width),int(r.y)] = 1
-    for intr in interceptor_list:
-        pix[int(intr.x + 0.5*width),int(intr.y)] = 2
+        input[int(r[0] + 0.5*width),int(r[1])] = 1
+
+    #i_locs: Location of each interceptor in the game (x,y)
+    for intr in i_locs:
+        input[int(intr[0] + 0.5*width),int(intr[1])] = 7
+
+    #c_locs: Location of each city in the game (x, width)
+    for c in c_locs:
+        x= int(c[0] + 0.5 * width)
+        city_width = c[1]
+        for w in range(city_width):
+            input[x+w,0] = 2
+
+
+
+
 # plt.plot(r.x, r.y, '.y')
 
 
